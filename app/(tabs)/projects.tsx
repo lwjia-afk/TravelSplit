@@ -158,9 +158,8 @@ export default function ProjectsScreen() {
           const isCurrent = tr.id === trip.id;
           const isShared  = !!tr.shareCode;
           return (
-            <TouchableOpacity key={tr.id} style={[s.card, isCurrent && s.cardActive]}
-              onPress={() => switchTrip(tr.id)}>
-              <View style={s.cardLeft}>
+            <View key={tr.id} style={[s.card, isCurrent && s.cardActive]}>
+              <TouchableOpacity style={s.cardLeft} onPress={() => switchTrip(tr.id)}>
                 <Text style={s.cardEmoji}>{tr.emoji}</Text>
                 <View style={{ flex: 1 }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
@@ -184,11 +183,11 @@ export default function ProjectsScreen() {
                     {t.total_label} {currencySymbol(tr.currency)}{(totalExp(tr) / 100).toFixed(tr.currency === 'JPY' || tr.currency === 'KRW' ? 0 : 2)}
                   </Text>
                 </View>
-              </View>
+              </TouchableOpacity>
               <TouchableOpacity style={s.delBtn} onPress={() => confirmDelete(tr.id, tr.name)}>
                 <Text style={s.delBtnText}>✕</Text>
               </TouchableOpacity>
-            </TouchableOpacity>
+            </View>
           );
         })}
       </ScrollView>

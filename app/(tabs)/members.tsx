@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   View, Text, ScrollView, TouchableOpacity, Modal,
   TextInput, StyleSheet, SafeAreaView, Alert, StatusBar,
+  KeyboardAvoidingView, Platform,
 } from 'react-native';
 import { useStore } from '../../src/store';
 import { Member, Sponsor } from '../../src/types';
@@ -309,20 +310,22 @@ export default function MembersScreen() {
 
       {/* 家庭弹窗 */}
       <Modal visible={showFamilyModal} animationType="slide" transparent onRequestClose={() => setShowFamilyModal(false)}>
-        <TouchableOpacity style={s.overlay} activeOpacity={1} onPress={() => setShowFamilyModal(false)}>
-          <TouchableOpacity style={s.sheet} activeOpacity={1}>
-            <View style={s.handle} />
-            <Text style={s.modalTitle}>{t.add_family_title}</Text>
-            <View style={s.modalBody}>
-              <Text style={s.label}>{t.family_name}</Text>
-              <TextInput style={s.input} placeholder={t.family_name_placeholder} placeholderTextColor={C.text3}
-                value={fName} onChangeText={setFName} />
-              <TouchableOpacity style={s.btnPrimary} onPress={saveFamily}>
-                <Text style={s.btnPrimaryText}>{t.add_family_title}</Text>
-              </TouchableOpacity>
-            </View>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          <TouchableOpacity style={s.overlay} activeOpacity={1} onPress={() => setShowFamilyModal(false)}>
+            <TouchableOpacity style={s.sheet} activeOpacity={1}>
+              <View style={s.handle} />
+              <Text style={s.modalTitle}>{t.add_family_title}</Text>
+              <View style={s.modalBody}>
+                <Text style={s.label}>{t.family_name}</Text>
+                <TextInput style={s.input} placeholder={t.family_name_placeholder} placeholderTextColor={C.text3}
+                  value={fName} onChangeText={setFName} />
+                <TouchableOpacity style={s.btnPrimary} onPress={saveFamily}>
+                  <Text style={s.btnPrimaryText}>{t.add_family_title}</Text>
+                </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
           </TouchableOpacity>
-        </TouchableOpacity>
+        </KeyboardAvoidingView>
       </Modal>
     </SafeAreaView>
   );
