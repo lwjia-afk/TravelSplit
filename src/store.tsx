@@ -76,8 +76,10 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
           parsed.trips = parsed.trips.map(t => ({
             emoji: '✈️',
             currency: 'CNY' as Currency,
+            members: [],
+            families: [],
             ...t,
-            expenses: t.expenses.map(e => ({
+            expenses: (t.expenses ?? []).map(e => ({
               time: e.createdAt ?? Date.now(),
               splitTarget: 'person',
               ...e,
@@ -113,7 +115,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             ...prev,
             trips: prev.trips.map(t =>
               t.shareCode === localTrip.shareCode
-                ? { ...remoteTrip, id: t.id }  // 保留本地 ID，其余用远端数据
+                ? { members: [], families: [], expenses: [], ...remoteTrip, id: t.id }  // 保留本地 ID，其余用远端数据
                 : t
             ),
           };
@@ -311,7 +313,13 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     // 用新 ID 保存在本地，shareCode 保持一致用于后续同步
     const localId = uid();
-    const joinedTrip: Trip = { ...remoteTrip, id: localId };
+    const joinedTrip: Trip = {
+      members: [],
+      families: [],
+      expenses: [],
+      ...remoteTrip,
+      id: localId,
+    };
     saveLocal({ trips: [...data.trips, joinedTrip], currentTripId: localId });
 
     return 'success';
