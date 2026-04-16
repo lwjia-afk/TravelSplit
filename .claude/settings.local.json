@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "Bash(npm install:*)",
-      "Bash(npx jest:*)"
+      "Bash(npx jest:*)",
+      "Bash(cat app.json)",
+      "Bash(cat app.config.js)",
+      "Bash(cat app.config.ts)",
+      "Bash(chmod +x \"c:/Users/lwjia/OneDrive/Documents/Claude/Projects/AccountFamily/TravelSplit/.git/hooks/pre-commit\")",
+      "Bash(npx tsc *)"
     ]
   }
 }
