@@ -341,7 +341,6 @@ export default function ProjectsScreen() {
                 onChangeText={v => setJoinCode(v.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6))}
                 autoCapitalize="characters"
                 autoCorrect={false}
-                maxLength={6}
                 keyboardType="default"
               />
               <TouchableOpacity
