@@ -331,6 +331,7 @@ export default function ProjectsScreen() {
           <TouchableOpacity style={s.sheet} activeOpacity={1} onPress={() => {}}>
             <View style={s.handle} />
             <Text style={s.modalTitle}>{t.join_title}</Text>
+<<<<<<< HEAD
             <ScrollView keyboardShouldPersistTaps="handled">
               <View style={s.modalBody}>
                 <Text style={s.label}>{t.share_code_label}</Text>
@@ -354,6 +355,29 @@ export default function ProjectsScreen() {
                 </TouchableOpacity>
               </View>
             </ScrollView>
+=======
+            <View style={s.modalBody}>
+              <Text style={s.label}>{t.share_code_label}</Text>
+              <TextInput
+                style={[s.input, s.codeInput]}
+                placeholder={t.join_placeholder}
+                placeholderTextColor={C.text3}
+                value={joinCode}
+                onChangeText={v => setJoinCode(v.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6))}
+                autoCapitalize="characters"
+                autoCorrect={false}
+                keyboardType="default"
+              />
+              <TouchableOpacity
+                style={[s.btnPrimary, { backgroundColor: C.success }, joinLoading && { opacity: 0.7 }]}
+                onPress={handleJoin}
+                disabled={joinLoading}>
+                {joinLoading
+                  ? <ActivityIndicator color="#fff" />
+                  : <Text style={s.btnPrimaryText}>{t.join_btn}</Text>}
+              </TouchableOpacity>
+            </View>
+>>>>>>> 49986c6f4a5136fe540beb85c43c8d1f9b056afd
           </TouchableOpacity>
         </TouchableOpacity>
       </Modal>
